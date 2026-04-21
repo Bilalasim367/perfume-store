@@ -22,7 +22,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="bg-[#1a1510]/95 backdrop-blur-lg border-b border-[#2a2520]">
+    <nav class="sticky top-0 z-[100] bg-[#1a1510]/95 backdrop-blur-lg border-b border-[#2a2520]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <!-- Logo -->
