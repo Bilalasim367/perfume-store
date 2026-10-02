@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SAFARI - Premium Perfumes')</title>
+    <meta name="description" content="SAFARI - Discover premium perfumes and fragrances. Shop our curated collection of luxury scents for men and women. Authentic fragrances with fast delivery.">
+    <meta name="keywords" content="perfume, fragrances, luxury perfume, men's perfume, women's perfume, attar, oud, dubai perfume">
+    <meta property="og:title" content="@yield('title', 'SAFARI - Premium Perfumes')">
+    <meta property="og:description" content="Discover premium perfumes and fragrances. Shop our curated collection of luxury scents.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="{{ url()->current() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,27 +39,38 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-6">
-                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Shop By</a>
-                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Classifications</a>
-                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Inspire By</a>
-                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Bundles</a>
-                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Other Collection</a>
+                    <a href="{{ route('products.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Shop</a>
+                    <a href="{{ route('about') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">About</a>
+                    <a href="{{ route('bundles.index') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Bundles</a>
+                    <a href="{{ route('contact') }}" class="text-sm font-medium text-gray-300 hover:text-[#B8A878] transition-colors">Contact</a>
                 </div>
 
                 <!-- Right Icons -->
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 group/search">
                     <!-- Search -->
-                    <button class="text-gray-300 hover:text-[#B8A878] transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                    </button>
+                    <form action="{{ route('products.index') }}" method="GET" class="relative flex items-center">
+                        <input type="text" name="search" placeholder="Search perfumes..." value="{{ request('search') }}" 
+                            class="w-0 group-hover/search:w-48 group-hover/search:opacity-100 px-3 py-1.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:border-[#B8A878] focus:w-48 opacity-0 transition-all duration-300">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#B8A878] transition-colors pointer-events-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </button>
+                    </form>
                     <!-- User -->
-                    <button class="text-gray-300 hover:text-[#B8A878] transition-colors">
+                    @auth
+                    <a href="{{ route('profile.show') }}" class="text-gray-300 hover:text-[#B8A878] transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
-                    </button>
+                    </a>
+                    @else
+                    <a href="{{ route('login') }}" class="text-gray-300 hover:text-[#B8A878] transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </a>
+                    @endauth
                     @auth
                     <a href="{{ route('cart.index') }}" class="text-gray-300 hover:text-[#B8A878] transition-colors relative">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,6 +101,7 @@
                             @if(auth()->user()->isAdmin())
                             <a href="{{ route('admin.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Admin Panel</a>
                             @endif
+                            <a href="{{ route('wishlist.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">My Wishlist</a>
                             <a href="{{ route('checkout.orders') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">My Orders</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -98,7 +117,7 @@
                     @endauth
 
                     <!-- Mobile Menu Button -->
-                    <button class="md:hidden p-2 text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <button class="md:hidden p-2 text-white" onclick="document.getElementById('mobile-menu').classList.remove('hidden')">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -107,20 +126,37 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#1a1510] border-t border-[#2a2520]">
-            <div class="px-4 py-4 space-y-3">
-                <a href="{{ route('home') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Home</a>
-                <a href="{{ route('products.index') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Shop</a>
-                <a href="{{ route('products.index') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Shop By</a>
-                <a href="{{ route('products.index') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Classifications</a>
-                <a href="{{ route('products.index') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Inspirations</a>
-                <a href="{{ route('products.index') }}" class="block py-2 text-sm font-medium text-gray-300 hover:text-[#B8A878]">Bundles</a>
-                @auth
-                <a href="{{ route('cart.index') }}" class="block py-2 text-sm font-medium text-gray-300">Cart</a>
-                @else
-                <a href="{{ route('login') }}" class="block py-2 text-sm font-medium text-gray-300">Login</a>
-                @endauth
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-[200] hidden">
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="document.getElementById('mobile-menu').classList.add('hidden')"></div>
+            <div class="absolute right-0 top-0 h-full w-72 bg-[#1a1510] shadow-2xl overflow-y-auto">
+                <div class="flex items-center justify-between p-4 border-b border-[#2a2520]">
+                    <img src="{{ asset('storage/website-logo.png') }}" alt="SAFARI" class="h-10 w-auto">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="p-2 text-gray-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4 space-y-1">
+                    <a href="{{ route('home') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Home</a>
+                    <a href="{{ route('products.index') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Shop</a>
+                    <a href="{{ route('about') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">About</a>
+                    <a href="{{ route('contact') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Contact</a>
+                    <a href="{{ route('products.index') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Bundles</a>
+                    <hr class="border-[#2a2520] my-4">
+                    @auth
+                    <a href="{{ route('cart.index') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Cart</a>
+                    <a href="{{ route('checkout.orders') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">My Orders</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block w-full py-3 px-3 text-left text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Logout</button>
+                    </form>
+                    @else
+                    <a href="{{ route('login') }}" class="block py-3 px-3 text-base font-medium text-gray-300 hover:text-[#B8A878] hover:bg-[#2a2520]/50 rounded-lg">Login</a>
+                    <a href="{{ route('register') }}" class="block py-3 px-3 text-center text-base font-medium bg-[#B8A878] text-[#0B0B0F] rounded-lg hover:bg-[#D4C4A8]">Sign Up</a>
+                    @endauth
+                </div>
             </div>
         </div>
     </nav>
@@ -142,17 +178,21 @@
                     <!-- Newsletter -->
                     <div>
                         <h4 class="font-medium text-white mb-4">Newsletter</h4>
-                        <form class="flex gap-2">
-                            <input type="email" placeholder="Your email" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#B8A878]">
+                        <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex gap-2">
+                            @csrf
+                            <input type="email" name="email" placeholder="Your email" required class="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#B8A878]">
                             <button type="submit" class="px-6 py-3 bg-[#B8A878] text-[#0B0B0F] font-semibold rounded-xl hover:bg-[#D4C4A8] transition-colors">
                                 SUBSCRIBE
                             </button>
                         </form>
+                        @if(session('newsletter_success'))
+                        <p class="text-green-400 text-sm mt-2">{{ session('newsletter_success') }}</p>
+                        @endif
                     </div>
                 </div>
 
                 <!-- Customer Service -->
-                <div>
+                <div class="mt-8 md:mt-0">
                     <h4 class="font-medium text-white mb-5">Customer Service</h4>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li><a href="#" class="hover:text-[#B8A878] transition-colors">Contact Us</a></li>
@@ -164,7 +204,7 @@
                 </div>
 
                 <!-- Quick Links -->
-                <div>
+                <div class="mt-8 md:mt-0">
                     <h4 class="font-medium text-white mb-5">Quick Links</h4>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li><a href="{{ route('products.index') }}" class="hover:text-[#B8A878] transition-colors">All Products</a></li>
@@ -218,16 +258,27 @@
 
     <!-- Purchase Notification Popup -->
     @php
-    $notifications = [
-        ['name' => 'Ali Ahmed', 'city' => 'Lahore', 'product' => 'Midnight Rose', 'image' => 'storage/products/1776632967_69e544878014f.png'],
-        ['name' => 'Muhammad Bilal', 'city' => 'Karachi', 'product' => 'Ocean Breeze', 'image' => 'storage/products/1776620032_69e5120064796.png'],
-        ['name' => 'Saif Khan', 'city' => 'Faisalabad', 'product' => 'Cedar Wood 1', 'image' => 'storage/products/1776620108_69e5124c793a3.png'],
-        ['name' => 'Usman Raza', 'city' => 'Islamabad', 'product' => 'Amber Dreams', 'image' => 'storage/products/1776632848_69e5441063d19.png'],
-        ['name' => 'Hamza Malik', 'city' => 'Multan', 'product' => 'Citrus Blast 1', 'image' => 'storage/products/1776620138_69e5126a516af.png'],
-        ['name' => 'Ahmed Hussain', 'city' => 'Rawalpindi', 'product' => 'Fresh Linen 1', 'image' => 'storage/products/1776632868_69e54424c0e5a.png'],
-        ['name' => 'Farhan Ali', 'city' => 'Peshawar', 'product' => 'Wood Spice 1', 'image' => 'storage/products/1776632885_69e54435ac882.png'],
-        ['name' => 'Bilal Aslam', 'city' => 'Sialkot', 'product' => 'Sweet Vanilla 1', 'image' => 'storage/products/1776632919_69e544576e4f8.png'],
-    ];
+    use App\Models\PurchaseNotification;
+    $dbNotifications = PurchaseNotification::displayed()->limit(8)->get();
+    if($dbNotifications->isNotEmpty()) {
+        $notifications = $dbNotifications->map(fn($n) => [
+            'name' => $n->customer_name,
+            'city' => $n->city,
+            'product' => $n->product_name,
+            'image' => $n->product_image,
+        ])->toArray();
+    } else {
+        $notifications = [
+            ['name' => 'Ali Ahmed', 'city' => 'Lahore', 'product' => 'Midnight Rose', 'image' => 'storage/products/1776632967_69e544878014f.png'],
+            ['name' => 'Muhammad Bilal', 'city' => 'Karachi', 'product' => 'Ocean Breeze', 'image' => 'storage/products/1776620032_69e5120064796.png'],
+            ['name' => 'Saif Khan', 'city' => 'Faisalabad', 'product' => 'Cedar Wood 1', 'image' => 'storage/products/1776620108_69e5124c793a3.png'],
+            ['name' => 'Usman Raza', 'city' => 'Islamabad', 'product' => 'Amber Dreams', 'image' => 'storage/products/1776632848_69e5441063d19.png'],
+            ['name' => 'Hamza Malik', 'city' => 'Multan', 'product' => 'Citrus Blast 1', 'image' => 'storage/products/1776620138_69e5126a516af.png'],
+            ['name' => 'Ahmed Hussain', 'city' => 'Rawalpindi', 'product' => 'Fresh Linen 1', 'image' => 'storage/products/1776632868_69e54424c0e5a.png'],
+            ['name' => 'Farhan Ali', 'city' => 'Peshawar', 'product' => 'Wood Spice 1', 'image' => 'storage/products/1776632885_69e54435ac882.png'],
+            ['name' => 'Bilal Aslam', 'city' => 'Sialkot', 'product' => 'Sweet Vanilla 1', 'image' => 'storage/products/1776632919_69e544576e4f8.png'],
+        ];
+    }
     @endphp
 
     <div id="notification-popup" class="fixed bottom-6 left-6 max-w-md bg-white border border-gray-200 rounded-2xl shadow-2xl p-4 flex items-center gap-4 z-50 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">

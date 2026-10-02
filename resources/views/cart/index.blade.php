@@ -20,8 +20,8 @@
                         @endif
                     </div>
                     <div class="flex-1">
-                        <a href="{{ route('products.show', $item->product) }}" class="font-semibold text-lg text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">{{ $item->product->name }}</a>
-                        <p class="text-[var(--color-accent)] font-medium mt-1">PKR {{ number_format($item->product->price * 280, 0) }}</p>
+                        <a href="{{ route('products.show', $item->product) }}" class="font-semibold text-lg text-#0B0B0F hover:text-#B8A878 transition-colors">{{ $item->product->name }}</a>
+                        <p class="text-#B8A878 font-medium mt-1">PKR {{ number_format($item->product->price * 280, 0) }}</p>
                         <div class="flex flex-wrap items-center gap-4 mt-4">
                             <form method="POST" action="{{ route('cart.update', $item) }}" class="flex items-center gap-2">
                                 @csrf
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="text-right sm:ml-auto">
-                        <p class="text-xl font-semibold text-[var(--color-primary)]">PKR {{ number_format($item->product->price * $item->quantity * 280, 0) }}</p>
+                        <p class="text-xl font-semibold text-#0B0B0F">PKR {{ number_format($item->product->price * $item->quantity * 280, 0) }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -51,11 +51,11 @@
 
             <div class="lg:col-span-1">
                 <div class="card p-6 sticky top-24">
-                    <h2 class="text-xl font-semibold text-[var(--color-primary)] mb-6">Order Summary</h2>
+                    <h2 class="text-xl font-semibold text-#0B0B0F mb-6">Order Summary</h2>
                     <div class="space-y-3 border-b border-gray-200 pb-4 mb-4">
                         <div class="flex justify-between">
                             <span class="text-gray-500">Subtotal</span>
-                            <span class="text-[var(--color-primary)]">PKR {{ number_format($total * 280, 0) }}</span>
+                            <span class="text-#0B0B0F">PKR {{ number_format($total * 280, 0) }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">Shipping</span>
@@ -63,8 +63,8 @@
                         </div>
                     </div>
                     <div class="flex justify-between font-semibold text-xl mb-6">
-                        <span class="text-[var(--color-primary)]">Total</span>
-                        <span class="text-[var(--color-primary)]">PKR {{ number_format($total * 280, 0) }}</span>
+                        <span class="text-#0B0B0F">Total</span>
+                        <span class="text-#0B0B0F">PKR {{ number_format($total * 280, 0) }}</span>
                     </div>
                     <a href="{{ route('checkout.index') }}" class="btn btn-primary w-full text-center">Proceed to Checkout</a>
                 </div>
@@ -77,7 +77,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                 </svg>
             </div>
-            <h2 class="text-2xl font-semibold text-[var(--color-primary)] mb-2">Your cart is empty</h2>
+            <h2 class="text-2xl font-semibold text-#0B0B0F mb-2">Your cart is empty</h2>
             <p class="text-gray-500 mb-8">Looks like you haven't added anything yet.</p>
             <a href="{{ route('products.index') }}" class="btn btn-primary inline-block">Continue Shopping</a>
         </div>

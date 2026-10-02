@@ -3,10 +3,10 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="min-h-screen bg-[var(--color-bg)] flex items-center justify-center py-12 px-4">
+<div class="min-h-screen bg-bg-white flex items-center justify-center py-12 px-4">
     <div class="w-full max-w-md">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-semibold text-[var(--color-primary)]">Create Account</h1>
+            <h1 class="text-3xl font-semibold text-#0B0B0F">Create Account</h1>
             <p class="text-gray-500 mt-2">Join us and start shopping</p>
         </div>
 
@@ -48,7 +48,7 @@
 
             <p class="mt-6 text-center text-sm text-gray-500">
                 Already have an account?
-                <a href="{{ route('login') }}" class="text-[var(--color-accent)] hover:underline font-medium">Sign In</a>
+                <a href="{{ route('login') }}" class="text-#B8A878 hover:underline font-medium">Sign In</a>
             </p>
         </div>
     </div>

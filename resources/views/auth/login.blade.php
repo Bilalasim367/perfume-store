@@ -30,12 +30,16 @@
                     @enderror
                 </div>
 
+                <div class="flex items-center justify-end mb-4">
+                    <a href="{{ route('password.request') }}" class="text-sm text-[#B8A878] hover:underline">Forgot Password?</a>
+                </div>
+
                 <button type="submit" class="btn btn-primary w-full">Sign In</button>
             </form>
 
             <p class="mt-6 text-center text-sm text-gray-500">
                 Don't have an account?
-                <a href="{{ route('register') }}" class="text-[var(--color-accent)] hover:underline font-medium">Register</a>
+                <a href="{{ route('register') }}" class="text-#B8A878 hover:underline font-medium">Register</a>
             </p>
         </div>
     </div>

@@ -68,11 +68,11 @@
                 </a>
 
                 <!-- Title -->
-                <h1 class="text-3xl md:text-4xl font-bold text-[#111827] mb-4">{{ $product->name }}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold text-[#0B0B0F] mb-4">{{ $product->name }}</h1>
 
                 <!-- Price -->
                 <div class="flex items-baseline gap-3 mb-6">
-                    <span class="text-3xl font-bold text-[#111827]">PKR {{ number_format($product->price * 280, 0) }}</span>
+                    <span class="text-3xl font-bold text-[#0B0B0F]">PKR {{ number_format($product->price * 280, 0) }}</span>
                     @if($product->hasDiscount())
                     <span class="text-lg text-gray-400 line-through">PKR {{ number_format($product->original_price * 280, 0) }}</span>
                     <span class="inline-flex items-center px-3 py-1 bg-amber-100 text-amber-800 text-sm font-semibold rounded-full">
@@ -104,20 +104,20 @@
 
                     <!-- Quantity -->
                     <div class="flex items-center border border-gray-200 rounded-xl">
-                        <button type="button" onclick="this.nextElementSibling.value = Math.max(1, parseInt(this.nextElementSibling.value) - 1)" class="px-4 py-3 text-gray-500 hover:text-[#111827] transition-colors">
+                        <button type="button" onclick="this.nextElementSibling.value = Math.max(1, parseInt(this.nextElementSibling.value) - 1)" class="px-4 py-3 text-gray-500 hover:text-[#0B0B0F] transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
                             </svg>
                         </button>
                         <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock }}" class="w-16 text-center border-none focus:outline-none focus:ring-0">
-                        <button type="button" onclick="this.previousElementSibling.value = Math.min({{ $product->stock }}, parseInt(this.previousElementSibling.value) + 1)" class="px-4 py-3 text-gray-500 hover:text-[#111827] transition-colors">
+                        <button type="button" onclick="this.previousElementSibling.value = Math.min({{ $product->stock }}, parseInt(this.previousElementSibling.value) + 1)" class="px-4 py-3 text-gray-500 hover:text-[#0B0B0F] transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                             </svg>
                         </button>
                     </div>
 
-                    <button type="submit" class="flex-1 sm:flex-none px-8 py-3 bg-[#111827] text-white font-semibold rounded-xl hover:bg-[#1f2937] transition-colors flex items-center justify-center gap-2">
+                    <button type="submit" class="flex-1 sm:flex-none px-8 py-3 bg-[#0B0B0F] text-white font-semibold rounded-xl hover:bg-[#1f2937] transition-colors flex items-center justify-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
@@ -131,7 +131,7 @@
                 @endif
                 @else
                 <div class="mb-8">
-                    <a href="{{ route('login') }}" class="block w-full px-8 py-3 bg-[#111827] text-white font-semibold rounded-xl text-center hover:bg-[#1f2937] transition-colors">
+                    <a href="{{ route('login') }}" class="block w-full px-8 py-3 bg-[#0B0B0F] text-white font-semibold rounded-xl text-center hover:bg-[#1f2937] transition-colors">
                         Login to Buy
                     </a>
                 </div>
@@ -164,7 +164,7 @@
                     <!-- Description Tab -->
                     <details class="group">
                         <summary class="flex items-center justify-between p-4 text-left bg-gray-50 hover:bg-gray-100 cursor-pointer list-none">
-                            <span class="font-medium text-[#111827]">Description</span>
+                            <span class="font-medium text-[#0B0B0F]">Description</span>
                             <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
@@ -177,7 +177,7 @@
                     <!-- Notes Tab -->
                     <details class="group border-t border-gray-100">
                         <summary class="flex items-center justify-between p-4 text-left hover:bg-gray-50 cursor-pointer list-none">
-                            <span class="font-medium text-[#111827]">Fragrance Notes</span>
+                            <span class="font-medium text-[#0B0B0F]">Fragrance Notes</span>
                             <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
@@ -185,15 +185,15 @@
                         <div class="p-4 border-t border-gray-100">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div>
-                                    <h4 class="font-medium text-[#111827] mb-2">Top Notes</h4>
+                                    <h4 class="font-medium text-[#0B0B0F] mb-2">Top Notes</h4>
                                     <p class="text-gray-500 text-sm">Fresh citrus, bergamot</p>
                                 </div>
                                 <div>
-                                    <h4 class="font-medium text-[#111827] mb-2">Heart Notes</h4>
+                                    <h4 class="font-medium text-[#0B0B0F] mb-2">Heart Notes</h4>
                                     <p class="text-gray-500 text-sm">Floral blend, jasmine</p>
                                 </div>
                                 <div>
-                                    <h4 class="font-medium text-[#111827] mb-2">Base Notes</h4>
+                                    <h4 class="font-medium text-[#0B0B0F] mb-2">Base Notes</h4>
                                     <p class="text-gray-500 text-sm">Musk, sandalwood</p>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                     <!-- Shipping Tab -->
                     <details class="group border-t border-gray-100">
                         <summary class="flex items-center justify-between p-4 text-left hover:bg-gray-50 cursor-pointer list-none">
-                            <span class="font-medium text-[#111827]">Shipping & Returns</span>
+                            <span class="font-medium text-[#0B0B0F]">Shipping & Returns</span>
                             <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
@@ -369,7 +369,7 @@ $maxCount = max($ratingCounts);
 @if($relatedProducts->isNotEmpty())
 <section class="py-12 md:py-16 bg-white border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-[#111827] mb-8">You May Also Like</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#0B0B0F] mb-8">You May Also Like</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach($relatedProducts as $related)
             @include('components.product-card', ['product' => $related])

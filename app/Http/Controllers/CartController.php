@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCartRequest;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CartController extends Controller
@@ -25,6 +26,23 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($request->product_id);
 
+        if (!$product->is_active) {
+            return back()->with('error', 'This product is not available');
+        }
+
+        if ($product->stock < 1) {
+            return back()->with('error', 'This product is out of stock');
+        }
+
+        $existingQty = CartItem::where('user_id', auth()->id())
+            ->where('product_id', $product->id)
+            ->value('quantity') ?? 0;
+
+        $totalRequested = $existingQty + $request->quantity;
+        if ($totalRequested > $product->stock) {
+            return back()->with('error', 'Only ' . $product->stock . ' items available in stock');
+        }
+
         $cartItem = CartItem::where('user_id', auth()->id())
             ->where('product_id', $product->id)
             ->first();
@@ -41,11 +59,15 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Product added to cart');
+        return back()->with('success', 'Product added to cart');
     }
 
-    public function update(CartItem $cartItem, StoreCartRequest $request): RedirectResponse
+    public function update(CartItem $cartItem, Request $request): RedirectResponse
     {
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:100',
+        ]);
+
         $cartItem->quantity = min($request->quantity, $cartItem->product->stock);
         $cartItem->save();
 

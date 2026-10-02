@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
+use App\Models\Bundle;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,7 +30,25 @@ class ProductController extends Controller
             $query->where('name', 'like', '%'.strip_tags($request->search).'%');
         }
 
-        $products = $query->latest()->paginate(12)->withQueryString();
+        $minPriceInput = $request->input('min_price');
+        $maxPriceInput = $request->input('max_price');
+        
+        if ($minPriceInput !== null && $minPriceInput !== '') {
+            $query->where('price', '>=', (float) $minPriceInput);
+        }
+
+        if ($maxPriceInput !== null && $maxPriceInput !== '') {
+            $query->where('price', '<=', (float) $maxPriceInput);
+        }
+
+        $sortBy = $request->input('sort', 'newest');
+        match ($sortBy) {
+            'price_asc' => $query->orderBy('price', 'asc'),
+            'price_desc' => $query->orderBy('price', 'desc'),
+            default => $query->orderBy('created_at', 'desc'),
+        };
+
+        $products = $query->paginate(12)->withQueryString();
         $categories = Category::all();
         $selectedCategory = $request->category;
 
@@ -50,5 +69,11 @@ class ProductController extends Controller
         $productAds = Ad::active()->byPlacement(Ad::PLACEMENT_PRODUCT)->featured()->get();
 
         return view('products.show', compact('product', 'relatedProducts', 'productAds'));
+    }
+
+    public function bundles(): View
+    {
+        $bundles = Bundle::active()->latest()->paginate(12);
+        return view('products.bundles', compact('bundles'));
     }
 }

@@ -275,17 +275,6 @@ $recentReviews = \App\Models\Review::with('user')->latest()->take(6)->get();
                         ['name' => 'Ali Raza', 'title' => 'Perfect for daily use', 'text' => 'This is my go-to fragrance now. Not too overpowering, just perfect!', 'product' => 'Midnight Rose - Floral Blend'],
                         ['name' => 'Saif Khan', 'title' => 'Great scent', 'text' => 'Received many compliments. The scent is elegant and sophisticated.', 'product' => 'Amber Dreams - Oriental Blend'],
                     ];
-                    
-                    if($recentReviews->count() > 0) {
-                        $reviewData = $recentReviews->first();
-                        if($reviewData && $reviewData->comment) {
-                            $reviews[0]['text'] = Str::limit($reviewData->comment, 80);
-                            $reviews[0]['rating'] = $reviewData->rating;
-                            if($reviewData->user) {
-                                $reviews[0]['name'] = $reviewData->user->name;
-                            }
-                        }
-                    }
                     @endphp
                     
                     @foreach($reviews as $idx => $review)

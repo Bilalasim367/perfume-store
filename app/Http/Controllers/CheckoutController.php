@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Http\Requests\StoreCheckoutRequest;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\PurchaseNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -60,13 +62,24 @@ class CheckoutController extends Controller
                     'price' => $item->product->price,
                 ]);
 
+                $firstItem = $item;
                 $item->product->decrement('stock', $item->quantity);
             }
+
+            PurchaseNotification::create([
+                'customer_name' => auth()->user()->name,
+                'city' => strip_tags($request->shipping_city),
+                'product_name' => $firstItem->product->name,
+                'product_image' => $firstItem->product->image,
+                'purchased_at' => now(),
+            ]);
 
             CartItem::where('user_id', auth()->id())->delete();
 
             return $order;
         });
+
+        event(new OrderCreated($order));
 
         return redirect()->route('checkout.show', $order)->with('success', 'Order placed successfully');
     }

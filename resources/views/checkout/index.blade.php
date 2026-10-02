@@ -3,16 +3,16 @@
 @section('title', 'Checkout')
 
 @section('content')
-<div class="min-h-screen bg-[var(--color-bg)] py-8">
+<div class="min-h-screen bg-bg-white py-8">
     <div class="max-w-6xl mx-auto px-4">
-        <h1 class="text-3xl font-semibold text-[var(--color-primary)] mb-8">Checkout</h1>
+        <h1 class="text-3xl font-semibold text-#0B0B0F mb-8">Checkout</h1>
 
         <form method="POST" action="{{ route('checkout.store') }}">
             @csrf
             <div class="grid lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 space-y-6">
                     <div class="card p-6">
-                        <h2 class="text-xl font-semibold text-[var(--color-primary)] mb-6">Shipping Information</h2>
+                        <h2 class="text-xl font-semibold text-#0B0B0F mb-6">Shipping Information</h2>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="label">Full Name</label>
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="card p-6">
-                        <h2 class="text-xl font-semibold text-[var(--color-primary)] mb-6">Order Items</h2>
+                        <h2 class="text-xl font-semibold text-#0B0B0F mb-6">Order Items</h2>
                         <div class="space-y-4">
                             @foreach($cartItems as $item)
                             <div class="flex items-center gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
@@ -69,10 +69,10 @@
                                     @endif
                                 </div>
                                 <div class="flex-1">
-                                    <p class="font-medium text-[var(--color-primary)]">{{ $item->product->name }}</p>
+                                    <p class="font-medium text-#0B0B0F">{{ $item->product->name }}</p>
                                     <p class="text-sm text-gray-500">Qty: {{ $item->quantity }}</p>
                                 </div>
-                                <p class="font-medium text-[var(--color-primary)]">PKR {{ number_format($item->product->price * $item->quantity * 280, 0) }}</p>
+                                <p class="font-medium text-#0B0B0F">PKR {{ number_format($item->product->price * $item->quantity * 280, 0) }}</p>
                             </div>
                             @endforeach
                         </div>
@@ -81,11 +81,11 @@
 
                 <div class="lg:col-span-1">
                     <div class="card p-6 sticky top-24">
-                        <h2 class="text-xl font-semibold text-[var(--color-primary)] mb-6">Order Summary</h2>
+                        <h2 class="text-xl font-semibold text-#0B0B0F mb-6">Order Summary</h2>
                         <div class="space-y-3 border-b border-gray-200 pb-4 mb-4">
                             <div class="flex justify-between">
                                 <span class="text-gray-500">Subtotal</span>
-                                <span class="text-[var(--color-primary)]">PKR {{ number_format($total * 280, 0) }}</span>
+                                <span class="text-#0B0B0F">PKR {{ number_format($total * 280, 0) }}</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-500">Shipping</span>
@@ -93,8 +93,8 @@
                             </div>
                         </div>
                         <div class="flex justify-between font-semibold text-xl mb-6">
-                            <span class="text-[var(--color-primary)]">Total</span>
-                            <span class="text-[var(--color-primary)]">PKR {{ number_format($total * 280, 0) }}</span>
+                            <span class="text-#0B0B0F">Total</span>
+                            <span class="text-#0B0B0F">PKR {{ number_format($total * 280, 0) }}</span>
                         </div>
                         <button type="submit" class="btn btn-primary w-full">Place Order</button>
                     </div>
